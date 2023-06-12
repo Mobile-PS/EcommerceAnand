@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/filter/filter_screen.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 
 import '../../../size_config.dart';
@@ -12,24 +13,30 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+   return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SearchField(),
-          IconBtnWithCounter(
+          SizedBox(width: 5,),
+        /*  GestureDetector(onTap: () {
+            Navigator.pushNamed(
+              context,
+              FilterScreen.routeName,
+            );
+          },
+          child: Icon(Icons.filter_list_outlined,size: 35,),
+    ),*/
+         /* IconBtnWithCounter(
             svgSrc: "assets/icons/Cart Icon.svg",
             press: () => Navigator.pushNamed(context, CartScreen.routeName),
-          ),
-          IconBtnWithCounter(
+          ),*/
+         /* IconBtnWithCounter(
             svgSrc: "assets/icons/Bell.svg",
             numOfitem: 3,
             press: () {},
-          ),
+          ),*/
         ],
-      ),
+
     );
   }
 }

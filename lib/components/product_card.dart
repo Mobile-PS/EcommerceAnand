@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shop_app/api/constants.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/models/product_model.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 
 import '../constants.dart';
@@ -15,12 +17,12 @@ class ProductCard extends StatelessWidget {
   }) : super(key: key);
 
   final double width, aspectRetio;
-  final Product product;
+  final Products product;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: getProportionateScreenWidth(20)),
+      padding: EdgeInsets.only(left: getProportionateScreenWidth(20),top: 10),
       child: SizedBox(
         width: getProportionateScreenWidth(width),
         child: GestureDetector(
@@ -39,31 +41,38 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: kSecondaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: [BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 5.0,
+                    ),],
+                    image: DecorationImage(image: NetworkImage( ApiConstants().imagebaseUrl+product.id.toString()),fit: BoxFit.fill)
                   ),
-                  child: Hero(
+                  /*child: Hero(
                     tag: product.id.toString(),
                     child: Image.asset(product.images[0]),
-                  ),
+                  ),*/
                 ),
               ),
               const SizedBox(height: 10),
+              Expanded(child:
               Text(
-                product.title,
+                product.productName!,
                 style: TextStyle(color: Colors.black),
                 maxLines: 2,
-              ),
+              )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Expanded(child:
                   Text(
-                    "\$${product.price}",
+                    "\₹${product.price}",
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
                       fontWeight: FontWeight.w600,
                       color: kPrimaryColor,
                     ),
-                  ),
-                  InkWell(
+                  )),
+                  /*InkWell(
                     borderRadius: BorderRadius.circular(50),
                     onTap: () {},
                     child: Container(
@@ -83,7 +92,7 @@ class ProductCard extends StatelessWidget {
                             : Color(0xFFDBDEE4),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               )
             ],

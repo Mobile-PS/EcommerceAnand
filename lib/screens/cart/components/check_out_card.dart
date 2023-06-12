@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/controller/cart_screen_controller.dart';
+import 'package:shop_app/screens/payment_method.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class CheckoutCard extends StatelessWidget {
+class CheckoutCard extends StatefulWidget {
   const CheckoutCard({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<CheckoutCard> createState() => _CheckoutCardState();
+}
+
+class _CheckoutCardState extends State<CheckoutCard> {
+  final con = Get.put(CartScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +47,7 @@ class CheckoutCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+           /* Row(
               children: [
                 Container(
                   padding: EdgeInsets.all(10),
@@ -58,7 +68,7 @@ class CheckoutCard extends StatelessWidget {
                   color: kTextColor,
                 )
               ],
-            ),
+            ),*/
             SizedBox(height: getProportionateScreenHeight(20)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +78,7 @@ class CheckoutCard extends StatelessWidget {
                     text: "Total:\n",
                     children: [
                       TextSpan(
-                        text: "\$337.15",
+                        text: "\₹"+con.total.toString(),
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ],
@@ -78,7 +88,13 @@ class CheckoutCard extends StatelessWidget {
                   width: getProportionateScreenWidth(190),
                   child: DefaultButton(
                     text: "Check Out",
-                    press: () {},
+                    press: () {
+
+                      Get.to(PaymentMethod());
+
+                     // con.CheckoutCart(con.loginScreenResponse!.cartDetails![0].cdCartId.toString());
+
+                    },
                   ),
                 ),
               ],

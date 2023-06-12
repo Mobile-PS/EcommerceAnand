@@ -10,18 +10,18 @@ class DiscountBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 90,
+       height: 190,
       width: double.infinity,
       margin: EdgeInsets.all(getProportionateScreenWidth(20)),
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(20),
-        vertical: getProportionateScreenWidth(15),
-      ),
       decoration: BoxDecoration(
         color: Color(0xFF4A3298),
         borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(
+          image: AssetImage("assets/images/icon.jpeg"),
+          fit: BoxFit.fill,
+        ),
       ),
-      child: Text.rich(
+      /*child: Text.rich(
         TextSpan(
           style: TextStyle(color: Colors.white),
           children: [
@@ -35,7 +35,7 @@ class DiscountBanner extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }

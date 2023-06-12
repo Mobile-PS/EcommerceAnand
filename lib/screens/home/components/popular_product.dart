@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/screens/home/product_list_screen.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -13,10 +14,15 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Popular Products", press: () {}),
+          child: SectionTitle(title: "Popular Products", press: () {
+            Navigator.pushNamed(
+              context,
+              ProductListScreen.routeName,
+            );
+          }),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
-        SingleChildScrollView(
+        /*SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
@@ -24,7 +30,7 @@ class PopularProducts extends StatelessWidget {
                 demoProducts.length,
                 (index) {
                   if (demoProducts[index].isPopular)
-                    return ProductCard(product: demoProducts[index]);
+                    return ProductCard(product: demoProducts![index]);
 
                   return SizedBox
                       .shrink(); // here by default width and height is 0
@@ -33,7 +39,7 @@ class PopularProducts extends StatelessWidget {
               SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),
-        )
+        )*/
       ],
     );
   }

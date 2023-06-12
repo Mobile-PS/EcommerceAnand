@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/components/rounded_icon_btn.dart';
+import 'package:shop_app/controller/details_screen_controller.dart';
+import 'package:shop_app/controller/home_screen_controller.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/models/product_model.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class ColorDots extends StatelessWidget {
+class ColorDots extends StatefulWidget {
   const ColorDots({
     Key? key,
     required this.product,
   }) : super(key: key);
 
-  final Product product;
+  final Products product;
+
+  @override
+  State<ColorDots> createState() => _ColorDotsState();
+}
+
+class _ColorDotsState extends State<ColorDots> {
+
+  final con = Get.put(DetailsScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +34,31 @@ class ColorDots extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
       child: Row(
         children: [
-          ...List.generate(
+          /*...List.generate(
             product.colors.length,
             (index) => ColorDot(
               color: product.colors[index],
               isSelected: index == selectedColor,
             ),
-          ),
+          ),*/
           Spacer(),
           RoundedIconBtn(
             icon: Icons.remove,
-            press: () {},
+            press: () {
+              if(con.cartCount > 0) {
+                con.updateCart('min');
+              }
+            },
           ),
+          SizedBox(width: getProportionateScreenWidth(20)),
+          Text(con.cartCount.toString()),
           SizedBox(width: getProportionateScreenWidth(20)),
           RoundedIconBtn(
             icon: Icons.add,
             showShadow: true,
-            press: () {},
+            press: () {
+              con.updateCart('inc');
+            },
           ),
         ],
       ),
